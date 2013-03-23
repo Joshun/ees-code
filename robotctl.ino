@@ -153,9 +153,10 @@ void gpsread()
 		if( gpsSerial.read() == '\n')
 		{
 			int i;
-			char modecheck[7];
-			for(i=0; i<7; i++){ modecheck[i] = '\0'; }
-			gpsSerial.readBytes(modecheck, strlen(GPS_MODE));
+			int check_size = strlen(GPS_MODE);
+			char modecheck[check_size + 1];
+			for(i=0; i<check_size; i++){ modecheck[i] = '\0'; }
+			gpsSerial.readBytes(modecheck, check_size);
 			if ( strstr(modecheck, GPS_MODE) )
 			{
 				for(i=0; i<MAX_GPS_DATA; i++){ gpsdata[i] = '\0'; }
